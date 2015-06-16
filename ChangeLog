@@ -1,0 +1,7 @@
+2015-06-15 Loek Hilgersom  <typo3extensions@netcoop.nl>
+
+	* initial version 0.0.1
+	Copied code from class.tslib_fe.php in TYPO3 4.7, added core hooks and made minor modifications to make it work.
+	Only difference from old code is that the [FE][logfile_dir] setting should be placed in AdditionalConfiguration.php 
+	instead of LocalConfiguration, because the Install tool will remove it as it's no longer a known TYPO3 setting.
+
