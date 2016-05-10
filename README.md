@@ -10,7 +10,15 @@ http://typo3.org/extensions/repository/view/retrostats
 
 ## Configuration
 
-The ['TYPO3_CONV_VARS']['FE']['logfile_dir'] setting should be placed in AdditionalConfiguration.php instead of LocalConfiguration.php, because the Install tool will remove it as it's no longer a known TYPO3 setting.
+The ['TYPO3_CONF_VARS']['FE']['logfile_dir'] setting should be placed in AdditionalConfiguration.php instead of LocalConfiguration.php, because the Install tool will remove it as it's no longer a known TYPO3 setting.
+
+If you don't already have it, create the file `AdditionalConfiguration.php` inside directory typo3conf with the following contents:
+
+    <?php
+    // Value of logfile_dir is relative to site root and should end with / (slash)
+    $GLOBALS['TYPO3_CONF_VARS']['FE']['logfile_dir'] = 'fileadmin/logfiles/';
+    
+    // .... other contents of this file
 
 ## TypoScript configuration
 	
@@ -34,4 +42,23 @@ The ['TYPO3_CONV_VARS']['FE']['logfile_dir'] setting should be placed in Additio
 | stat_IP_anonymize_mask_ipv4 | int | (Since TYPO3 4.7); Prefx-mask 0..32 to use for anonymisation of IP addresses (IPv4). Only used, if stat_IP_anonymize is set to 1.; Recommendation for Germany: config.stat_IP_anonymize_ipv4 = 24 | 24 |
 | stat_IP_anonymize_mask_ipv6 | int | (Since TYPO3 4.7); Prefx-mask 0..128 to use for anonymisation of IP addresses (IPv6). Only used, if stat_IP_anonymize is set to 1. Recommendation for Germany: config.stat_IP_anonymize_ipv6 = 64 | 64 |
 | stat_logUser | boolean | (Since TYPO3 4.7) Confgure whether to log the username of the Frontend user, if the user is logged in in the FE currently. Setting this to 0 allows to anonymize the username. | 1 |
+
+### Example TypoScript (setup)
+
+Setting the following options will be sufficient in most cases. 
+The first 3 settings (stat, stat_apache and stat_apache_logfile) are essential, the rest is optional.
+
+    config {
+    	// Necessary configuration options:
+    	stat = 1
+    	stat_apache = 1
+    	stat_apache_logfile = www.mysite.com.log
+    	
+    	// Optional:
+    	// This one is adviced in combination with realurl:
+    	stat_apache_pagenames = [request_uri]
+    	
+    	stat_excludeBEuserHits = 1
+    	stat_excludeIPList = xxx.xx.xx.xxx,yy.yy.yyy.yyy
+    }
 

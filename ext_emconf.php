@@ -11,7 +11,7 @@
 ########################################################################
 
 $EM_CONF[$_EXTKEY] = array(
-	'title' => 'Retro Statistics - Re-introduce the good\'ol apache logfile',
+	'title' => 'Retro Statistics - Re-introduce logfile apache style',
 	'description' => 'Re-introduces the good old apache-style logfile written by TYPO3. This should make extensions like AWstats work again with TYPO3 versions 6 and higher. Place the [FE][logfile_dir] setting in AdditionalConfiguration.php instead of LocalConfiguration!',
 	'category' => 'fe',
 	'author' => 'Loek Hilgersom',
@@ -21,7 +21,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'conflicts' => '',
 	'priority' => '',
 	'module' => '',
-	'state' => 'beta',
+	'state' => 'stable',
 	'internal' => '',
 	'uploadfolder' => 0,
 	'createDirs' => '',
@@ -29,7 +29,7 @@ $EM_CONF[$_EXTKEY] = array(
 	'clearCacheOnLoad' => 1,
 	'lockType' => '',
 	'author_company' => '',
-	'version' => '0.0.2-dev',
+	'version' => '0.1.1',
 	'constraints' => array(
 		'depends' => array(
 			'typo3' => '6.2.0-7.9.99',
