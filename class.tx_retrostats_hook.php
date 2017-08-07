@@ -43,6 +43,10 @@ class tx_retrostats_hook {
 	var $pi_checkCHash = true;
 
 	function statisticsInitHook(&$params, &$parentObject) {
+		if (!is_object($GLOBALS['TT'])) {
+			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
+			$GLOBALS['TT']->start();
+		}
 
 		$this->pObj = &$parentObject;
 		if ($parentObject->tmpl->loaded && is_array($parentObject->pSetup)) {
@@ -74,10 +78,7 @@ class tx_retrostats_hook {
 	 */
 	protected function statistics_init() {
 		$setStatPageName = FALSE;
-                if (!is_object($GLOBALS['TT'])) {
-			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
-			$GLOBALS['TT']->start();
-		}
+
 		$theLogFile = $GLOBALS['TYPO3_CONF_VARS']['FE']['logfile_dir'].strftime($this->pObj->config['config']['stat_apache_logfile']);
 
 		// Add PATH_site left to $theLogFile if the path is not absolute yet
@@ -331,4 +332,3 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/retrost
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/retrostats/class.tx_retrostats_hook.php']);
 }
 
-?>
