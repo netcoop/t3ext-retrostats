@@ -43,6 +43,10 @@ class tx_retrostats_hook {
 	var $pi_checkCHash = true;
 
 	function statisticsInitHook(&$params, &$parentObject) {
+		if (!is_object($GLOBALS['TT'])) {
+			$GLOBALS['TT'] = new \TYPO3\CMS\Core\TimeTracker\TimeTracker();
+			$GLOBALS['TT']->start();
+		}
 
 		$this->pObj = &$parentObject;
 		if ($parentObject->tmpl->loaded && is_array($parentObject->pSetup)) {
@@ -328,4 +332,3 @@ if (defined('TYPO3_MODE') && $TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/retrost
 	include_once($TYPO3_CONF_VARS[TYPO3_MODE]['XCLASS']['ext/retrostats/class.tx_retrostats_hook.php']);
 }
 
-?>
